@@ -44,8 +44,8 @@ def matLimit(nr, mat, lim):
     writeLine(") "+str(lim)+")",1)
 def notTogether(a,b,nr):
     for i in range (1,nr+1):
-        writeLine("( or (and (> " + str(a) + str(i) + " 0) (= " + str(b) +str(i) +" 0)) (and (> "+str(b)+str(i)+" 0) (= "+str(a) +str(i)+" 0)) )", 1)  
-    
+        #writeLine("( or (and (> " + str(a) + str(i) + " 0) (= " + str(b) +str(i) +" 0)) (and (> "+str(b)+str(i)+" 0) (= "+str(a) +str(i)+" 0)) (and (= "+str(b)+str(i)+" 0) (= "+str(a) +str(i)+" 0)) )", 1) 
+        writeLine("( or (implies (> " + str(a) + str(i) + " 0) (= " + str(b) +str(i) +" 0)) (implies (> "+str(b)+str(i)+" 0) (= "+str(a) +str(i)+" 0)) )", 1) 
 
 
 destp = 'E:\\yices\\bin\\'    

@@ -42,7 +42,9 @@ def matLimit(nr, mat, lim):
     for i in range (1,nr+1):
         writeLine("truck"+str(mat)+str(i),0)
     writeLine(") "+str(lim)+")",1)
-            
+def notTogether(a,b,nr):
+    for i in range (1,nr+1):
+        writeLine("( or (and (> " + str(a) + str(i) + " 0) (= " + str(b) +str(i) +" 0)) (and (> "+str(b)+str(i)+" 0) (= "+str(a) +str(i)+" 0)) )", 1)  
     
 
 
@@ -80,8 +82,12 @@ with open(destp+dest, 'w') as f:
     matLimit(8,"D",20)
     manyCons("=","truckS",0,5) #Skipples need to be cooled; only three of the eight trucks have facility for cooling skipples.
     manyCons("<","truckN",2,8) #Nuzzles are very valuable: to distribute the risk of loss no two pallets of nuzzles may be in the same truck.
-
-    matLimit(8,"P",22) #Max needs to be determined. Experimental results show 22.
+    
+    #1.bthat prittles and crottles are an explosive combination
+    #uncommment to enable 1.b --> max is 20
+    notTogether("truckP","truckC",8)
+    
+    matLimit(8,"P",20) #Max needs to be determined. Experimental results show 22.
     #End of constraints
 
     writeLine("", 1)

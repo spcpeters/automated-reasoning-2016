@@ -54,7 +54,7 @@ with open(filename, 'w') as f:
     TRANs("a",NrSteps,NrOfVar)
     # Uncomment either 4.a or 4.b to run
     #4.a
-    #riteLine("(= a3"+str(NrSteps)+" "+"a5"+str(NrSteps) +")",1)
+    #riteLine("(= a3"+str(NrSteps)+" "+"a7"+str(NrSteps) +")",1)
     #4.b
     writeLine("(= a3"+str(NrSteps)+" "+"a5"+str(NrSteps) +" "+"a7"+str(NrSteps) +")",1)
 

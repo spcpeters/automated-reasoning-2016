@@ -40,7 +40,7 @@ with open(filename, 'w') as f:
 	INITvar("a",8)
 	TRANS("a",8)
 	#4.a
-	#writeLine("LTLSPEC G !((a3 = a5))",1)
+	#writeLine("LTLSPEC G !((a3 = a7))",1)
 	#4.b
 	writeLine("LTLSPEC G !((a3 = a5) & (a5 = a7))",1)
 

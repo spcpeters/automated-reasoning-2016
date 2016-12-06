@@ -14,7 +14,7 @@ def OneStep(name,step,nr): # one transition: e.g. a12 ( a1 is variable and 2 is 
     for var in range (2,nr):
         writeLine("( and ",0)
         writeLine("(= "+str(name)+str(var)+str(step)+" "+"(+ " + str(name)+str(var-1)+str(step-1) +" "+ str(name)+str(var+1)+str(step-1)+")) ",0)
-        for j in [k for k in range (1,nr+1) if k!=var]:
+        for j in [k for k in range (1,nr+1) if k!=var and k!=1 and k!=8]:
             writeLine("(= "+str(name)+str(j)+str(step)+" "+ str(name)+str(j)+str(step-1)+" )",0)
         writeLine(")",1)
     writeLine(")",1)
@@ -32,11 +32,19 @@ def startUp():
 def INITvar(name,nr):
     for i in range (1,nr+1):
         writeLine("(=  "+str(name)+str(i)+str(0) + " " + str(i)+" )",1)
-
+def AssignA1_A8(name,NrSteps):
+    for i in [1,8]:
+        for j in range (1,NrSteps+1):
+            writeLine("(=  "+str(name)+str(i)+str(j) + " " + str(i)+" )",1)
+def BoudnedA2_A7(name,NrSteps,value):
+    for i in range (2,8):
+        for j in range (1,NrSteps+1):
+            writeLine("(and (<=  "+str(name)+str(i)+str(j) + " " + str(value)+" )"+" "+"(>=  "+str(name)+str(i)+str(j) + " " + str(i)+" ))",1)
 filename="SMT_Question4.smt"
 print "Start of writing"
-NrSteps=10
+NrSteps=17
 NrOfVar=8
+valueRange=50
 with open(filename, 'w') as f:
     startUp()
     #Enter any amount of NewVars here
@@ -50,11 +58,14 @@ with open(filename, 'w') as f:
 
     # initial values
     INITvar("a",NrOfVar)
+    #assign a1 = 1 and a8 =8
+    AssignA1_A8("a",NrSteps)
+    BoudnedA2_A7("a",NrSteps,valueRange)
     # Transition
     TRANs("a",NrSteps,NrOfVar)
     # Uncomment either 4.a or 4.b to run
     #4.a
-    #riteLine("(= a3"+str(NrSteps)+" "+"a7"+str(NrSteps) +")",1)
+    #writeLine("(= a3"+str(NrSteps)+" "+"a7"+str(NrSteps) +")",1)
     #4.b
     writeLine("(= a3"+str(NrSteps)+" "+"a5"+str(NrSteps) +" "+"a7"+str(NrSteps) +")",1)
 
@@ -62,5 +73,4 @@ with open(filename, 'w') as f:
     writeLine("", 1)
     writeLine("))", 0)
     f.closed
-
 
